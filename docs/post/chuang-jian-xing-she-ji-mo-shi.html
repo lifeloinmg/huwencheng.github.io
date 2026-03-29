@@ -64,7 +64,11 @@ public class DclSingleton {
         return singleton;  
     }  
 }
-```。">
+```
+### 1.4、静态内部类
+ Java 的静态内部类;类 Singleton被加载的时候
+SingletonHolder 这个静态内部类，只会在第一次被使用时加载并初始化；
+JVM 在执行类的 <clinit>() 方法时，会加锁、同步，确保多线程下也只执行一次。">
 <meta property="og:title" content="创建型设计模式">
 <meta property="og:description" content="`创建型设计模式：关注对象的创建过程
 单例模式、工厂方法模式、抽象工厂模式、建造者模式、原型模式`
@@ -120,7 +124,11 @@ public class DclSingleton {
         return singleton;  
     }  
 }
-```。">
+```
+### 1.4、静态内部类
+ Java 的静态内部类;类 Singleton被加载的时候
+SingletonHolder 这个静态内部类，只会在第一次被使用时加载并初始化；
+JVM 在执行类的 <clinit>() 方法时，会加锁、同步，确保多线程下也只执行一次。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://lifeloinmg.github.io/huwencheng.github.io/post/chuang-jian-xing-she-ji-mo-shi.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/132213325?s=400&u=4eee6bfadc570c937aa271c237ffb8090717ffdd&v=4">
@@ -239,6 +247,76 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         return singleton;  
     }  
 }
+</code></pre>
+<h3>1.4、静态内部类</h3>
+<p>Java 的静态内部类;类 Singleton被加载的时候<br>
+SingletonHolder 这个静态内部类，只会在第一次被使用时加载并初始化；<br>
+JVM 在执行类的 () 方法时，会加锁、同步，确保多线程下也只执行一次。</p>
+<pre class="notranslate"><code class="notranslate">public class InnerSingleton {
+
+    /** 私有化构造器 */
+    private Singleton() {
+    }
+
+    /** 对外提供公共的访问方法 */
+    public static Singleton getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    /** 写一个静态内部类，里面实例化外部类 */
+    private static class SingletonHolder {
+        private static final Singleton INSTANCE = new Singleton();
+    }
+
+}
+</code></pre>
+<h3>1.5、枚举</h3>
+<p>枚举类中，每一个枚举项本身就是一个单例；枚举类在加载时就初始化实例，且只执行一次，线程安全由 JVM 保证；</p>
+<pre class="notranslate"><code class="notranslate">public enum SingletonEnum {
+
+    // 唯一的枚举实例
+    INSTANCE;
+
+    // 可以添加你的业务方法
+    public void doSomething() {
+        System.out.println("单例方法执行");
+    }
+}
+</code></pre>
+<h2>2、漏洞</h2>
+<h3>2.1、反射注入构造函数</h3>
+<p>上述的单例模式之中，私有化构造器并不能阻止其他人通过反射的方式进行注入（枚举除外）；<br>
+需要在构造函数之中多进行一次处理</p>
+<pre class="notranslate"><code class="notranslate">    private SingletonExample() {
+        // 防止通过反射创建多个实例
+        if (instance != null) {
+            throw new RuntimeException("禁止通过反射创建第二个实例！");
+        }
+    }
+</code></pre>
+<pre class="notranslate"><code class="notranslate">    /**
+     * 通过反射创建指定类的实例
+     * 
+     * @param clazz 要实例化的类
+     * @param &lt;T&gt; 类型参数
+     * @return 创建的新实例
+     * @throws RuntimeException 如果实例化失败
+     */
+    public static &lt;T&gt; T createInstance(Class&lt;T&gt; clazz) {
+        try {
+            Constructor&lt;T&gt; constructor = clazz.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            return constructor.newInstance();
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("找不到无参构造函数: " + clazz.getName(), e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException("无法实例化: " + clazz.getName(), e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("访问被拒绝: " + clazz.getName(), e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException("构造函数调用失败: " + clazz.getName(), e);
+        }
+    }
 </code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 

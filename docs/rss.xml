@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>欢迎来到huwencheng的博客</title><link>https://lifeloinmg.github.io/huwencheng.github.io</link><description>公开学习成长记录，持续沉淀所学知识点、问题解法与实践经验，打造可追溯的个人知识库。</description><copyright>欢迎来到huwencheng的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/132213325?s=400&amp;u=4eee6bfadc570c937aa271c237ffb8090717ffdd&amp;v=4</url><title>avatar</title><link>https://lifeloinmg.github.io/huwencheng.github.io</link></image><lastBuildDate>Fri, 27 Mar 2026 17:02:00 +0000</lastBuildDate><managingEditor>欢迎来到huwencheng的博客</managingEditor><ttl>60</ttl><webMaster>欢迎来到huwencheng的博客</webMaster><item><title>测试</title><link>https://lifeloinmg.github.io/huwencheng.github.io/post/ce-shi.html</link><description>测试多级目录信息
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>欢迎来到huwencheng的博客</title><link>https://lifeloinmg.github.io/huwencheng.github.io</link><description>公开学习成长记录，持续沉淀所学知识点、问题解法与实践经验，打造可追溯的个人知识库。</description><copyright>欢迎来到huwencheng的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/132213325?s=400&amp;u=4eee6bfadc570c937aa271c237ffb8090717ffdd&amp;v=4</url><title>avatar</title><link>https://lifeloinmg.github.io/huwencheng.github.io</link></image><lastBuildDate>Sun, 29 Mar 2026 09:33:27 +0000</lastBuildDate><managingEditor>欢迎来到huwencheng的博客</managingEditor><ttl>60</ttl><webMaster>欢迎来到huwencheng的博客</webMaster><item><title>测试</title><link>https://lifeloinmg.github.io/huwencheng.github.io/post/ce-shi.html</link><description>测试多级目录信息
 测试编辑信息
 #1 测试信息。</description><guid isPermaLink="true">https://lifeloinmg.github.io/huwencheng.github.io/post/ce-shi.html</guid><pubDate>Mon, 23 Mar 2026 11:13:07 +0000</pubDate></item><item><title>测试多级目录信息</title><link>https://lifeloinmg.github.io/huwencheng.github.io/post/ce-shi-duo-ji-mu-lu-xin-xi.html</link><guid isPermaLink="true">https://lifeloinmg.github.io/huwencheng.github.io/post/ce-shi-duo-ji-mu-lu-xin-xi.html</guid><pubDate>Mon, 23 Mar 2026 11:12:28 +0000</pubDate></item><item><title>创建型设计模式</title><link>https://lifeloinmg.github.io/huwencheng.github.io/post/chuang-jian-xing-she-ji-mo-shi.html</link><description>`创建型设计模式：关注对象的创建过程
 单例模式、工厂方法模式、抽象工厂模式、建造者模式、原型模式`
@@ -55,6 +55,10 @@ public class DclSingleton {
         return singleton;  
     }  
 }
-```。</description><guid isPermaLink="true">https://lifeloinmg.github.io/huwencheng.github.io/post/chuang-jian-xing-she-ji-mo-shi.html</guid><pubDate>Mon, 23 Mar 2026 11:06:54 +0000</pubDate></item><item><title>设计原则</title><link>https://lifeloinmg.github.io/huwencheng.github.io/post/she-ji-yuan-ze.html</link><description># 一、为什么要学习设计模式？
+```
+### 1.4、静态内部类
+ Java 的静态内部类;类 Singleton被加载的时候
+SingletonHolder 这个静态内部类，只会在第一次被使用时加载并初始化；
+JVM 在执行类的 &lt;clinit&gt;() 方法时，会加锁、同步，确保多线程下也只执行一次。</description><guid isPermaLink="true">https://lifeloinmg.github.io/huwencheng.github.io/post/chuang-jian-xing-she-ji-mo-shi.html</guid><pubDate>Mon, 23 Mar 2026 11:06:54 +0000</pubDate></item><item><title>设计原则</title><link>https://lifeloinmg.github.io/huwencheng.github.io/post/she-ji-yuan-ze.html</link><description># 一、为什么要学习设计模式？
 ## 1、提高设计和开发能力，不写烂代码
 在软件开发中，“能跑起来” 只是基础，“能长期跑好、易迭代” 才是关键。</description><guid isPermaLink="true">https://lifeloinmg.github.io/huwencheng.github.io/post/she-ji-yuan-ze.html</guid><pubDate>Mon, 23 Mar 2026 10:54:46 +0000</pubDate></item></channel></rss>
