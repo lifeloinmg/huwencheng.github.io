@@ -371,6 +371,14 @@ JVM 在执行类的 () 方法时，会加锁、同步，确保多线程下也只
         
         // 清理文件
         new File(fileName).delete();
+</code></pre>
+<h2>3、源码之中的应用</h2>
+<h2>3.1、JDK之中的标准单例模式-&gt;Runtime类</h2>
+<pre class="notranslate"><code class="notranslate">public class Runtime {
+
+    // 典型的饿汉式
+    private static final Runtime currentRuntime = new Runtime();
+}
 </code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
