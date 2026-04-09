@@ -393,7 +393,106 @@ JVM 在执行类的 () 方法时，会加锁、同步，确保多线程下也只
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/be4edf91-47a3-44b2-ade2-f745139003f2"><img width="1490" height="1112" alt="Image" src="https://github.com/user-attachments/assets/be4edf91-47a3-44b2-ade2-f745139003f2" style="max-width: 100%; height: auto; max-height: 1112px;"></a></p>
 <h3>1.3、抽象工厂</h3>
 <p>根据不同的参数选择不同的工厂，工厂创建不同的产品族</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/52e744c9-4046-4901-aacc-b81141830f1b"><img width="1690" height="1680" alt="Image" src="https://github.com/user-attachments/assets/52e744c9-4046-4901-aacc-b81141830f1b" style="max-width: 100%; height: auto; max-height: 1680px;"></a></p></div>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/52e744c9-4046-4901-aacc-b81141830f1b"><img width="1690" height="1680" alt="Image" src="https://github.com/user-attachments/assets/52e744c9-4046-4901-aacc-b81141830f1b" style="max-width: 100%; height: auto; max-height: 1680px;"></a></p>
+<h1>三、建造者模式</h1>
+<p>包含四个角色</p>
+<p>产品（Product）—— 最终要构建的复杂对象</p>
+<p>抽象创建者（Abstract Builder）—— 构建产品的“接口规范”</p>
+<p>具体创建者（Concrete Builder）—— 执行构建的“实际操作者”</p>
+<p>指挥者（Director）—— 控制构建流程的“总指挥”</p>
+<h2>1、实现方法</h2>
+<h3>1.1、按照角色进行创建</h3>
+<p>分别创建上述四种角色进行调用</p>
+<h3>1.2、使用注解<a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/builder/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/builder">@builder</a></h3>
+<p>注解在编译过程之中会自动创建一个静态内部类【类名+Build】对象进行构建</p>
+<pre class="notranslate"><code class="notranslate">public class Person {
+    private String name;
+    private int age;
+    private String address;
+
+    Person(String name, int age, String address) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    }
+
+    public static PersonBuilder builder() {
+        return new PersonBuilder();
+    }
+
+    public static class PersonBuilder {
+        private String name;
+        private int age;
+        private String address;
+
+        PersonBuilder() {
+        }
+
+        public PersonBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public PersonBuilder age(int age) {
+            this.age = age;
+            return this;
+        }
+
+        public PersonBuilder address(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Person build() {
+            return new Person(this.name, this.age, this.address);
+        }
+
+        public String toString() {
+            return "Person.PersonBuilder(name=" + this.name + ", age=" + this.age + ", address=" + this.address + ")";
+        }
+    }
+
+</code></pre>
+<h2>2、构建示例</h2>
+<p>手动调用</p>
+<pre class="notranslate"><code class="notranslate">User.UserBuilder builder = User.builder();
+
+builder = builder.id(1L);
+builder = builder.name("小明");
+builder = builder.age(20);
+builder = builder.email("test@qq.com");
+
+User user = builder.build();
+</code></pre>
+<p>链式调用</p>
+<pre class="notranslate"><code class="notranslate">User.builder()       // 拿到 builder
+     .id(1L)         // builder赋值，返回自己
+     .name("小明")   // 继续赋值，返回自己
+     .age(20)        // 继续赋值，返回自己
+     .build();       // 最后生成对象
+</code></pre>
+<h1>四、原型设计模式</h1>
+<p>对象的创建成本较高的时候，通过拷贝的方式创建新的对象</p>
+<h2>1、实现方式</h2>
+<h3>1.1、浅拷贝</h3>
+<p>直接复制对象的值</p>
+<p>实现Cloneable接口，并且重写clone方法（来自object类的方法）</p>
+<pre class="notranslate"><code class="notranslate">    @Override
+    protected Person clone() {
+        try {
+            // super.clone()执行浅拷贝：
+            // - 基本数据类型：复制值
+            // - 引用类型：复制引用（指向同一个对象）
+            return (Person) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("克隆失败", e);
+        }
+    }
+</code></pre>
+<h2>1.2、深拷贝</h2>
+<p>递归克隆</p>
+<p>为每个实体类实现了深拷贝方法</p>
+<p>序列化-&gt;反序列化</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
